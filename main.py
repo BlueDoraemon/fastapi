@@ -4,7 +4,17 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://bluedoraemon.github.io"],  # Or use "*" for all origins during development
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods including OPTIONS
+    allow_headers=["*"],  # Allow all headers
+)
 # Load environment variables
 load_dotenv()
 
@@ -13,8 +23,6 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=os.getenv("OPENROUTER_API_KEY"),
 )
-
-app = FastAPI()
 
 class VideoRequest(BaseModel):
     url: str
