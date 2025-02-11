@@ -1,29 +1,135 @@
+# README
+
+## **YouTube Video Summarizer API**
+
+This project is a FastAPI-based web application that extracts transcripts from YouTube videos and generates summaries using OpenAI's OpenRouter API. It is designed to process YouTube video URLs, fetch their transcripts, and return concise summaries.
+
 ---
-title: FastAPI
-description: A FastAPI server
-tags:
-  - fastapi
-  - hypercorn
-  - python
+
+## **Features**
+- Extracts transcripts from YouTube videos using the `youtube-transcript-api`.
+- Summarizes video content using OpenAI's language models via the OpenRouter API.
+- Provides a RESTful API with endpoints for summarization and basic health checks.
+
 ---
 
-# FastAPI Example
+## **Requirements**
+- Python 3.9 or higher
+- Dependencies listed in `requirements.txt`
 
-This example starts up a [FastAPI](https://fastapi.tiangolo.com/) server.
+---
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/-NvLj4?referralCode=CRJ8FE)
-## ✨ Features
+## **Installation**
 
-- FastAPI
-- [Hypercorn](https://hypercorn.readthedocs.io/)
-- Python 3
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
 
-## 💁‍♀️ How to use
+2. **Set Up a Virtual Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-- Clone locally and install packages with pip using `pip install -r requirements.txt`
-- Run locally using `hypercorn main:app --reload`
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 📝 Notes
+4. **Set Up Environment Variables**:
+   - Create a `.env` file in the project root directory and add the following variables:
+     ```env
+     OPENROUTER_API_KEY=<your_openrouter_api_key>
+     YOUR_SITE_URL=<your_site_url>
+     YOUR_SITE_NAME=<your_site_name>
+     MODEL=<openai_model_name>  # e.g., gpt-4 or gpt-3.5-turbo
+     ```
 
-- To learn about how to use FastAPI with most of its features, you can visit the [FastAPI Documentation](https://fastapi.tiangolo.com/tutorial/)
-- To learn about Hypercorn and how to configure it, read their [Documentation](https://hypercorn.readthedocs.io/)
+---
+
+## **Usage**
+
+### **Run the Application**
+Start the FastAPI server:
+```bash
+uvicorn main:app --reload
+```
+
+The server will start at `http://127.0.0.1:8000`.
+
+### **Endpoints**
+
+#### 1. **Summarize Video**
+- **URL**: `/summarize`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "url": "https://www.youtube.com/watch?v=<video_id>"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "summary": "<summarized_text>"
+  }
+  ```
+
+#### 2. **Root Endpoint**
+- **URL**: `/`
+- **Method**: `GET`
+- **Response**:
+  ```json
+  {
+    "greeting": "Hello, World!",
+    "message": "Welcome to FastAPI!"
+  }
+  ```
+
+---
+
+## **How It Works**
+
+1. The user sends a YouTube video URL to the `/summarize` endpoint.
+2. The app extracts the video ID from the URL.
+3. The transcript is fetched using the `youtube-transcript-api`.
+4. The transcript is sent to OpenRouter's API for summarization.
+5. A concise summary is returned to the user.
+
+---
+
+## **Error Handling**
+- Handles invalid YouTube URLs with appropriate error messages.
+- Catches exceptions during transcript fetching or summarization and returns meaningful HTTP error codes.
+
+---
+
+## **Dependencies**
+Key dependencies include:
+- `FastAPI`: For building the web API.
+- `Pydantic`: For request and response validation.
+- `youtube-transcript-api`: For fetching YouTube video transcripts.
+- `openai`: For interacting with OpenRouter's API.
+- `python-dotenv`: For managing environment variables.
+
+---
+
+## **Future Improvements**
+- Add support for multilingual transcripts and summaries.
+- Implement caching for frequently summarized videos.
+- Enhance error handling for unsupported videos (e.g., no captions).
+
+---
+
+## **License**
+This project is licensed under the MIT License.
+
+---
+
+Feel free to modify this README as needed!
+
+Citations:
+[1] https://pplx-res.cloudinary.com/image/upload/v1739107031/user_uploads/KEjYMMUYFYgIyNN/image.jpg
+[2] https://pplx-res.cloudinary.com/image/upload/v1739107051/user_uploads/NiIhGWypSLXxiHE/image.jpg
