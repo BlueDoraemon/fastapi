@@ -122,14 +122,3 @@ Key dependencies include:
 - Enhance error handling for unsupported videos (e.g., no captions).
 
 ---
-
-## **License**
-This project is licensed under the MIT License.
-
----
-
-Feel free to modify this README as needed!
-
-Citations:
-[1] https://pplx-res.cloudinary.com/image/upload/v1739107031/user_uploads/KEjYMMUYFYgIyNN/image.jpg
-[2] https://pplx-res.cloudinary.com/image/upload/v1739107051/user_uploads/NiIhGWypSLXxiHE/image.jpg
