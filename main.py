@@ -30,11 +30,16 @@ class VideoRequest(BaseModel):
 class SummaryResponse(BaseModel):
     summary: str
 
+# Updated to include youtu.be
 def get_video_id(url: str) -> str:
     """Extract video ID from YouTube URL."""
-    if "v=" in url:
+    if "youtu.be/" in url:
+        return url.split("youtu.be/")[1].split("?")[0]
+    elif "v=" in url:
         return url.split("v=")[1].split("&")[0]
-    raise ValueError("Invalid YouTube URL")
+    else:
+        raise ValueError("Invalid YouTube URL") 
+
 
 def get_transcript(video_id: str) -> str:
     """Fetch the transcript of a YouTube video."""
@@ -76,3 +81,4 @@ async def summarize_video(request: VideoRequest):
 @app.get("/")
 async def root():
     return {"greeting": "Hello, World!", "message": "Welcome to FastAPI!"}
+
