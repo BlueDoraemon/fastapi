@@ -1,6 +1,6 @@
 # README
 
-## **YouTube Video Summarizer API**
+## **YouTube Video Summariser API**
 
 This project is a FastAPI-based web application that extracts transcripts from YouTube videos and generates summaries using OpenAI's OpenRouter API. It is designed to process YouTube video URLs, fetch their transcripts, and return concise summaries.
 
